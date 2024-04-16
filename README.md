@@ -101,9 +101,8 @@ None.
 
 ## License
 
-MIT
+MIT / BSD
 
 ## Author Information
 
-This role template was created based on the provided variables. Feel free to
-customize it further based on your specific needs.
+This role was created in 2024 by [Joker Wrld](https://docs.jokerwrld.win/).
