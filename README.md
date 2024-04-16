@@ -67,9 +67,9 @@ Consider using Ansible Vault or other secure credential management solutions.
 
 **Encrypt Password:**
 
-    ```python
-    python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-    ```
+```python
+python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+```
 
 - `root_passwd`: String, empty by default. Set your Root password.
 - `custom_user_passwd`: String, empty by default. Set your Custom user's
