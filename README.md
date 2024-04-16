@@ -27,7 +27,7 @@ This role provides basic pre-configuration tasks for your servers.
     - Tags: ssh
   - Install Qemu Guest Agent
 
-**Requirements:**
+## Requirements:
 
 None.
 
@@ -65,11 +65,11 @@ Consider using Ansible Vault or other secure credential management solutions.
 
 **Users Password (Optional - Security Consideration):**
 
-# Encrypt Password
+**Encrypt Password:**
 
-```python
-python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-```
+    ```python
+    python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+    ```
 
 - `root_passwd`: String, empty by default. Set your Root password.
 - `custom_user_passwd`: String, empty by default. Set your Custom user's
