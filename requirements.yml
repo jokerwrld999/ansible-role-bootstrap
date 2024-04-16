@@ -1,6 +1,4 @@
 ---
 collections:
-  - ansible.posix
-  - community.crypto
   - community.general
   - kewlfft.aur

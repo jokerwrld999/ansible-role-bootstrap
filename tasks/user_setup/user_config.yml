@@ -13,6 +13,10 @@
     password: "{{ custom_user_passwd }}"
     update_password: on_create
     shell: /bin/zsh
+    generate_ssh_key: yes
+    ssh_key_type: "ed25519"
+    ssh_key_file: .ssh/ed_25519
+    ssh_key_comment: "$HOSTNAME"
     state: present
 
 - name: Users | {{ custom_user }} | Stat sudoers file

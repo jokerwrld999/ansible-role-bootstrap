@@ -1,41 +1,105 @@
-# Role Name
+## Ansible Role: Bootstrap
 
-A brief description of the role goes here.
+This role provides basic pre-configuration tasks for your servers.
 
-## Requirements
+**Features:**
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+- **User Configuration:**
+  - Configure Root User
+  - Configure Custom User
+    - Tags: development, docker
+- **Install Software:**
+  - Configure Repositories
+    - Tags: development, docker, lxc
+  - Configure Development Packages
+    - Tags: development, docker, lxc
+  - Configure Tweaks
+  - Configure Docker
+    - Tags: development, docker
+  - Configure Utilities
+- **Perform Remaining Tasks:**
+  - Configure Hostname
+    - Condition: When set_hostname is defined and set to true
+  - Configure Logging
+  - Configure Microcode
+    - Tags: microcode
+  - Configure OpenSSH
+    - Tags: ssh
+  - Install Qemu Guest Agent
+
+**Requirements:**
+
+None.
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+Available variables are listed below, along with default values:
+
+**Pre-Configuration:**
+
+- `set_hostname`: Boolean, defaults to `false`. Set to `true` to configure a
+  custom hostname.
+- `custom_hostname`: String, a template for the hostname using
+  `${{ custom_user }}`. Example: `{{ custom_user }}-server`
+
+**SSH:**
+
+- `ssh_port`: Integer, defaults to `22`. Set the desired SSH port.
+
+**Users Config:**
+
+- `custom_user`: String, defaults to the value found in environment variable
+  `CUSTOM_USER`. Fallback is `"jokerwrld"`. Username for the custom user
+  account.
+- `temp_dir`: String, defaults to `"tmp"`. Temporary directory used for certain
+  tasks.
+
+**Alerts (Optional):**
+
+- `telegram_chat_id`: String, empty by default. Set your Telegram chat ID if
+  using Telegram alerts.
+- `telegram_token`: String, empty by default. Set your Telegram bot token if
+  using Telegram alerts.
+
+**Users Password (Optional - Security Consideration):**
+
+# Encrypt Password
+
+```python
+python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+```
+
+- `root_passwd`: String, empty by default. Set your Root password.
+- `custom_user_passwd`: String, empty by default. Set your Custom user's
+  password.
+
+**Example Playbook:**
+
+```yaml
+- hosts: all
+  roles:
+    - jokerwrld999.bootstrap
+
+  vars:
+    # Set your desired values here
+    set_hostname: true
+    custom_hostname: "{{ custom_user }}-server"
+    custom_user: myuser
+    ssh_port: 2234
+    # Uncomment and set values for Telegram alerts (optional)
+    # telegram_chat_id: "your_chat_id"
+    # telegram_token: "your_bot_token"
+```
 
 ## Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
-
-## Example Playbook
-
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+None.
 
 ## License
 
-BSD
+MIT
 
 ## Author Information
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
+This role template was created based on the provided variables. Feel free to
+customize it further based on your specific needs.

@@ -2,7 +2,7 @@
 # Pre-Configuration
 # Custom Hostname
 set_hostname: false
-custom_hostname: "{{ custom_user }}-server"
+custom_hostname: ""
 
 # SSH
 ssh_port: 22
@@ -13,8 +13,8 @@ temp_dir: "tmp"
 
 # Encrypt Password
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-root_passwd: "$6$aBitRBNIk5O7.rRs$.r7jWebBbVsx6GL7/8EixidRnFxtvSPEcXMkCLa.zKXS8ETQjpay54Htc9Q4sLJfs1Cyvjj4VVGpe5yc1zXLe/" # root
-custom_user_passwd: "$6$8ReSwQWsQjmGVfva$2/.pJ9aeIIXxAPhhpDuOhZ7161EKvAx2uFFdGpMC9tpMGEBO4m5MbGYR9nJloPrf68GSb7eSsN6Ef0FMKxkbQ1" # sudo
+root_passwd: ""
+custom_user_passwd: ""
 
 # Alerts
 telegram_chat_id: ""
