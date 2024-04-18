@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
-  remote_user: root
-  roles:
-    - ansible-role-bootstrap
+# - hosts: localhost
+#   remote_user: root
+#   roles:
+#     - ansible-role-bootstrap

@@ -5,21 +5,27 @@ This role provides basic pre-configuration tasks for your servers.
 **Features:**
 
 - **User Configuration:**
+
   - Configure Root User
+    - Tags: root
   - Configure Custom User
-    - Tags: development, docker
+    - Tags: user, development, docker
+
 - **Install Software:**
+
   - Configure Repositories
     - Tags: development, docker, lxc
   - Configure Development Packages
     - Tags: development, docker, lxc
   - Configure Tweaks
+    - Tags: tweaks
   - Configure Docker
     - Tags: development, docker
   - Configure Utilities
+    - Tags: utilities
+
 - **Perform Remaining Tasks:**
   - Configure Hostname
-    - Condition: When set_hostname is defined and set to true
   - Configure Logging
   - Configure Microcode
     - Tags: microcode
@@ -54,15 +60,6 @@ Available variables are listed below, along with default values:
 - `temp_dir`: String, defaults to `"tmp"`. Temporary directory used for certain
   tasks.
 
-**Alerts (Optional):**
-
-- `telegram_chat_id`: String, empty by default. Set your Telegram chat ID if
-  using Telegram alerts.
-- `telegram_token`: String, empty by default. Set your Telegram bot token if
-  using Telegram alerts.
-
-Consider using Ansible Vault or other secure credential management solutions.
-
 **Users Password (Optional - Security Consideration):**
 
 **Encrypt Password:**
@@ -90,9 +87,6 @@ Consider using Ansible Vault or other secure credential management solutions.
     custom_hostname: "{{ custom_user }}-server"
     custom_user: myuser
     ssh_port: 2234
-    # Uncomment and set values for Telegram alerts (optional)
-    # telegram_chat_id: "your_chat_id"
-    # telegram_token: "your_bot_token"
 ```
 
 ## Dependencies

@@ -6,7 +6,7 @@ galaxy_info:
   author: jokerwrld999
   description: Bootstrap your Linux servers.
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.10
+  min_ansible_version: "2.10"
   platforms:
     - name: ArchLinux
       versions:
@@ -38,3 +38,4 @@ galaxy_info:
     - server
     - utilities
     - ssh
+    - p10k

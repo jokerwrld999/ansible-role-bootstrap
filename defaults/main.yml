@@ -15,7 +15,3 @@ temp_dir: "tmp"
 # python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
 root_passwd: ""
 custom_user_passwd: ""
-
-# Alerts
-telegram_chat_id: ""
-telegram_token: ""
