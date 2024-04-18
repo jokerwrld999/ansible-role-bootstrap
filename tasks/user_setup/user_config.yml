@@ -30,7 +30,7 @@
     dest: "/etc/sudoers.d/sudoers_{{ custom_user }}"
     owner: root
     group: root
-    mode: 0440
+    mode: "0440"
   register: new_sudoers_file
   when: sudoers_file.stat.exists == false
 
@@ -55,7 +55,7 @@
     state: directory
     owner: "{{ custom_user }}"
     group: "{{ custom_user }}"
-    mode: 0700
+    mode: "0700"
   with_items:
     - { dir: ".config" }
   when: config_dir.stat.exists == false
@@ -66,7 +66,7 @@
     state: directory
     owner: "{{ custom_user }}"
     group: "{{ custom_user }}"
-    mode: 0700
+    mode: "0700"
   with_items:
     - { dir: ".config/htop" }
     - { dir: "github" }
@@ -79,7 +79,7 @@
     state: directory
     owner: "{{ custom_user }}"
     group: "{{ custom_user }}"
-    mode: 0755
+    mode: "0755"
   with_items:
     - { dir: "{{ temp_dir }}" }
 
@@ -89,7 +89,7 @@
     dest: "/home/{{ custom_user }}/{{ item.dest }}"
     owner: "{{ custom_user }}"
     group: "{{ custom_user }}"
-    mode: 0600
+    mode: "0600"
   with_items:
     - { src: "htop/htoprc", dest: ".config/htop/htoprc" }
     - { src: "inputrc", dest: ".inputrc" }
@@ -123,7 +123,7 @@
     dest: "/home/{{ custom_user }}/.zsh/{{ item.src }}"
     owner: "{{ custom_user }}"
     group: "{{ custom_user }}"
-    mode: 0600
+    mode: "0600"
   with_items:
     - { src: "aliases.zsh" }
     - { src: "bindkey.zsh" }

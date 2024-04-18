@@ -20,7 +20,7 @@
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: not sshd_template.found
 
 - name: System setup | OpenSSH | Check for WSL

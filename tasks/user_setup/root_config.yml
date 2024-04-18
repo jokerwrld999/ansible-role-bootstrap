@@ -24,7 +24,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0700
+    mode: "0700"
   with_items:
     - { dir: ".config" }
     - { dir: ".config/htop" }
@@ -36,7 +36,7 @@
     dest: /root/{{ item.dest }}
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
   with_items:
     - { src: "htop/htoprc", dest: ".config/htop/htoprc" }
     - { src: "inputrc", dest: ".inputrc" }
@@ -67,7 +67,7 @@
     dest: /root/.zsh/{{ item.src }}
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
   with_items:
     - { src: "aliases.zsh" }
     - { src: "bindkey.zsh" }
