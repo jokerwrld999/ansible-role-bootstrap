@@ -2,7 +2,8 @@
 role_name_check: 1
 dependency:
   name: galaxy
-  enabled: false
+  options:
+    ignore-errors: true
 driver:
   name: docker
 platforms:
@@ -16,8 +17,5 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-  env:
-    ANSIBLE_ROLES_PATH: "../../collections/roles"
-    ANSIBLE_COLLECTIONS_PATH: "../../collections/"
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
