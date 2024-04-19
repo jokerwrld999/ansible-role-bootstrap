@@ -5,6 +5,10 @@
 
 - name: Pre-Configuration
   block:
+    - name: Pre-Configuration | Update System
+      ansible.builtin.import_tasks: system_setup/update_system.yml
+      tags: always
+
     # User Configuration
     - name: Pre-Configuration | Configure Root User
       ansible.builtin.import_tasks: user_setup/root_config.yml
