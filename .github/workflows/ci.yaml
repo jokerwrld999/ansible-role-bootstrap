@@ -9,9 +9,9 @@ name: CI
   # schedule:
   #   - cron: "0 7 * * 0"
 
-# defaults:
-# run:
-# working-directory: "jokerwrld999.bootstrap"
+defaults:
+  run:
+    working-directory: "jokerwrld999.bootstrap"
 
 jobs:
   molecule:
@@ -20,14 +20,14 @@ jobs:
     strategy:
       matrix:
         distro:
-          # - rockylinux9
-          # - rockylinux8
-          - ubuntu2204
-          # - ubuntu2004
-          # - debian12
-          # - debian11
-          # - debian10
-          # - fedora39
+          - distro: rockylinux9
+            playbook: converge.yml
+          # - distro: fedora39
+          #   playbook: converge.yml
+          # - distro: ubuntu2204
+          #   playbook: converge.yml
+          # - distro: debian12
+          #   playbook: converge.yml
 
     steps:
       - name: Check out the codebase.
@@ -49,3 +49,4 @@ jobs:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
