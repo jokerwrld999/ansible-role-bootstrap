@@ -19,12 +19,10 @@
       ansible.builtin.fail:
         msg: >-
           {{
-            ternary(
-                "⚠️  Ansible provision failed on *{{ ansible_hostname }}*\n\n
-                *Task*:  {{ ansible_failed_task.name }}\n
-                *Action*: {{ ansible_failed_task.action }}\n
-                *Error Message*: \n ```{{ ansible_failed_result | to_nice_json }}```"
-            )
+            "⚠️  Ansible provision failed on *{{ ansible_hostname }}*\n\n
+            *Task*:  {{ ansible_failed_task.name }}\n
+            *Action*: {{ ansible_failed_task.action }}\n
+            *Error Message*: \n ```{{ ansible_failed_result | to_nice_json }}```"
           }}
       when:
         - task_failed is defined
