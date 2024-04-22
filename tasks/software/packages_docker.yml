@@ -47,9 +47,14 @@
     name: "{{ custom_user }}"
     groups: docker
     append: yes
+  register: setup_user
+  when:
+    - setup_user is defined
+    - setup_user == true
 
 - name: Software | Docker | Reconnect to server session
   ansible.builtin.meta: reset_connection
+  when: setup_user is changed
 
 - name: Software | Docker Compose | Install package
   ansible.builtin.package:

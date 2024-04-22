@@ -6,6 +6,7 @@ exclude_paths:
   - .github/
   - archive
   - collections/
+  - molecule/
   - roles/
   - .pre-commit-config.yaml
 

@@ -54,6 +54,7 @@ Available variables are listed below, along with default values:
 
 **Users Config:**
 
+- `setup_user`: Boolean, defaults to `false`. Set to `true` to configure a custom user.
 - `custom_user`: String, defaults to the value found in environment variable
   `CUSTOM_USER`. Fallback is `"jokerwrld"`. Username for the custom user
   account.
@@ -85,6 +86,7 @@ Consider using Ansible Vault or other secure credential management solutions.
     # Set your desired values here
     set_hostname: true
     custom_hostname: "{{ custom_user }}-server"
+    setup_user: true
     custom_user: myuser
     ssh_port: 2234
 ```

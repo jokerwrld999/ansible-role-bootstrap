@@ -20,3 +20,4 @@ rename_package: prename
 ruby: ruby
 sudo_group: wheel
 qemu_agent_service: qemu-guest-agent
+webp: libwebp

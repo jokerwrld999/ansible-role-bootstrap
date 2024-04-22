@@ -4,8 +4,8 @@
     name:
       - at
       - "{{ aws_cli }}"
+      - cifs-utils
       - colordiff
-      - curl
       - "{{ cron_package }}"
       - "{{ dns_utils_package }}"
       - htop
@@ -26,6 +26,7 @@
       - traceroute
       - tree
       - unzip
+      - "{{ webp }}"
       - wget
       - whois
 

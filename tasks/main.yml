@@ -9,21 +9,20 @@
       ansible.builtin.import_tasks: system_setup/update_system.yml
       tags: always
 
-    # User Configuration
     - name: Pre-Configuration | Configure Root User
       ansible.builtin.import_tasks: user_setup/root_config.yml
       tags:
         - development
-        - docker
         - lxc
 
     - name: Pre-Configuration | Configure Custom User
       ansible.builtin.import_tasks: user_setup/user_config.yml
       tags:
         - development
-        - docker
+      when:
+        - setup_user is defined
+        - setup_user == true
 
-    # Install software
     - name: Pre-Configuration | Configure Repositories
       ansible.builtin.import_tasks: software/repositories.yml
       tags:
@@ -50,7 +49,6 @@
     - name: Pre-Configuration | Configure Utilities
       ansible.builtin.import_tasks: software/packages_utilities.yml
 
-    # Perform remaining tasks:
     - name: Pre-Configuration | Configure Hostname
       ansible.builtin.import_tasks: system_setup/hostname.yml
       when:
@@ -62,13 +60,13 @@
 
     - name: Pre-Configuration | Configure Microcode
       ansible.builtin.import_tasks: system_setup/microcode.yml
-      tags:
-        - microcode
+      # tags:
+      #   - microcode
 
     - name: Pre-Configuration | Configure OpenSSH
       ansible.builtin.import_tasks: system_setup/openssh.yml
-      tags:
-        - ssh
+      # tags:
+      #   - ssh
 
     - name: Pre-Configuration | Install Qemu Guest Agent
       ansible.builtin.import_tasks: system_setup/qemu-agent.yml
