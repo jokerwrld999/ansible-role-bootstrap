@@ -15,13 +15,15 @@
     - role: jokerwrld999.bootstrap
 
   tasks:
-    - name: Output Failed Task
-      ansible.builtin.fail:
-        msg: |-
-          ⚠️  Ansible provision failed on *{{ ansible_hostname }}*\n\n
-          *Task*:  {{ ansible_failed_task.name }}\n
-          *Action*: {{ ansible_failed_task.action }}\n
-          *Error Message*: \n ```{{ ansible_failed_result | to_nice_json }}```
+    - name: Failed Task Output
+      ansible.builtin.debug:
+        msg:
+          - "⚠️  Ansible provision failed on *{{ ansible_hostname }}*"
+          - "*Task*:  {{ ansible_failed_task.name }}"
+          - "*Action*: {{ ansible_failed_task.action }}"
+          - "*Error Message*:"
+          - "{{ ansible_failed_result }}"
+      failed_when: true
       when:
         - task_failed is defined
         - task_failed == true
