@@ -18,10 +18,10 @@
     - name: Failed Task Output
       ansible.builtin.debug:
         msg:
-          - "⚠️  Ansible provision failed on *{{ ansible_hostname }}*"
-          - "*Task*:  {{ ansible_failed_task.name }}"
-          - "*Action*: {{ ansible_failed_task.action }}"
-          - "*Error Message*:"
+          - "⚠️  Ansible provision failed!"
+          - "Task:  {{ ansible_failed_task.name }}"
+          - "Action: {{ ansible_failed_task.action }}"
+          - "Error Message:"
           - "{{ ansible_failed_result }}"
       failed_when: true
       when:
