@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        distro:
+        include:
           - distro: rockylinux9
             playbook: converge.yml
           # - distro: fedora39
