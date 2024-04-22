@@ -17,5 +17,8 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      any_errors_fatal: true
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
