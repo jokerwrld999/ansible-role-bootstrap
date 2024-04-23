@@ -3,6 +3,7 @@
   ansible.builtin.package:
     name:
       - curl
+      - gnupg2
       - software-properties-common
       - wget
     state: latest
