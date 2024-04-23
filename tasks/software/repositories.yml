@@ -15,15 +15,21 @@
     line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers"
   when: ansible_distribution == "Archlinux"
 
+- name: Software | Repos | Stat Debian repos
+  ansible.builtin.stat:
+    path: "/etc/apt/sources.list"
+  register: debian_sources_file
+  when: ansible_distribution == "Debian"
+
 - name: Software | Repos | Ensure Debian sources updated
   ansible.builtin.lineinfile:
-    path: /etc/apt/sources.list
+    path: "/etc/apt/sources.list"
     regexp: "^# Modified by"
     state: absent
   check_mode: yes
   changed_when: false
   register: debian_sources
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution == "Debian" and debian_sources_file.stat.exists == true
 
 - name: Debug
   ansible.builtin.debug:
@@ -35,7 +41,7 @@
     dest: /etc/apt/sources.list
   when:
     - ansible_distribution == "Debian"
-    - not debian_sources.found
+    - debian_sources_file.stat.exists == false or not debian_sources.found
 
 - name: Software | Repos | Add GitHub CLI sources
   ansible.builtin.shell: |
