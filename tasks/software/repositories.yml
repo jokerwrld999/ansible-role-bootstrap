@@ -52,6 +52,12 @@
     creates: /etc/apt/sources.list.d/hashicorp.list
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
+- name: Software | Repos | Import Terraform Fedora
+  ansible.builtin.shell: |
+    dnf install -y dnf-plugins-core
+    dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+  when: ansible_distribution == "Fedora"
+
 - name: Software | Repos | Stat RPM Fusion repos
   ansible.builtin.stat:
     path: "/etc/yum.repos.d/rpmfusion-free-updates.repo"
