@@ -15,19 +15,19 @@
     line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers"
   when: ansible_distribution == "Archlinux"
 
-# - name: Software | Repos | Add sources Debian
-#   ansible.builtin.copy:
-#     src: distribution_packages/debian_sources.list
-#     dest: /etc/apt/sources.list
-#     backup: yes
-#   when: ansible_distribution == "Debian"
-
-- name: Software | Repos | Add debian-backports
-  ansible.builtin.shell: |
-    apt-add-repository --component non-free
-    apt-add-repository --component non-free-firmware
-    apt-get update
+- name: Software | Repos | Add sources Debian
+  ansible.builtin.copy:
+    src: distribution_packages/debian_sources.list
+    dest: /etc/apt/sources.list
+    # backup: yes
   when: ansible_distribution == "Debian"
+
+# - name: Software | Repos | Add debian-backports
+#   ansible.builtin.shell: |
+#     apt-add-repository --component non-free
+#     apt-add-repository --component non-free-firmware
+#     apt-get update
+# when: ansible_distribution == "Debian"
 
 - name: Software | Repos | Add GitHub CLI sources
   ansible.builtin.shell: |
