@@ -23,7 +23,8 @@
 #   when: ansible_distribution == "Debian"
 
 - name: Software | Repos | Add debian-backports
-  ansible.builtin.shell: apt-add-repository --component non-free
+  ansible.builtin.shell: |
+    apt-add-repository --component non-free
     apt-add-repository --component non-free-firmware
     apt-get update
   when: ansible_distribution == "Debian"
