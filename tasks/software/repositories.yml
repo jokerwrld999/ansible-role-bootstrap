@@ -29,7 +29,9 @@
   ansible.builtin.copy:
     src: distribution_packages/debian_sources.list
     dest: /etc/apt/sources.list
-  when: ansible_distribution == "Debian" and not debian_sources.found
+  when:
+    - ansible_distribution == "Debian"
+    - not debian_sources.found
 
 - name: Software | Repos | Add GitHub CLI sources
   ansible.builtin.shell: |
