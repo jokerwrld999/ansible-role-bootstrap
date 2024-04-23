@@ -3,7 +3,7 @@ aws_cli: awscli
 autojump_package: autojump-zsh
 amd_microcode_package: microcode_ctl
 cron_package: cronie
-docker_compose: docker-compose-plugin
+docker_compose: docker-compose
 dns_utils_package: bind-utils
 github_cli: gh
 intel_microcode_package: microcode_ctl
