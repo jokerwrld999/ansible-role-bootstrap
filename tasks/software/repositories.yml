@@ -24,6 +24,7 @@
     name:
       - curl
       - software-properties-common
+      - wget
     state: latest
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
