@@ -15,12 +15,21 @@
     line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers"
   when: ansible_distribution == "Archlinux"
 
-- name: Software | Repos | Add sources Debian
+- name: Software | Repos | Ensure Debian sources updated
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^# Modified by"
+    state: absent
+  check_mode: yes
+  changed_when: false
+  register: debian_sources
+  when: ansible_distribution == "Debian"
+
+- name: Software | Repos | Add Debian sources
   ansible.builtin.copy:
     src: distribution_packages/debian_sources.list
     dest: /etc/apt/sources.list
-    # backup: yes
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution == "Debian" and not debian_sources.found
 
 # - name: Software | Repos | Add debian-backports
 #   ansible.builtin.shell: |
