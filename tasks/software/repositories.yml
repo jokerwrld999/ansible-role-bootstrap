@@ -15,7 +15,7 @@
     line: "IgnorePkg   = ansible linux linux-headers linux-lts linux-lts-headers"
   when: ansible_distribution == "Archlinux"
 
-- name: Software | Repos | Stat Debian repos
+- name: Software | Repos | Stat Debian sources list
   ansible.builtin.stat:
     path: "/etc/apt/sources.list"
   register: debian_sources_file
@@ -30,10 +30,6 @@
   changed_when: false
   register: debian_sources
   when: ansible_distribution == "Debian" and debian_sources_file.stat.exists == true
-
-- name: Debug
-  ansible.builtin.debug:
-    var: debian_sources
 
 - name: Software | Repos | Add Debian sources
   ansible.builtin.copy:
@@ -64,11 +60,17 @@
     creates: /etc/apt/sources.list.d/hashicorp.list
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
+- name: Software | Repos | Stat Hashicorp repos
+  ansible.builtin.stat:
+    path: "/etc/yum.repos.d/hashicorp.repo"
+  register: additional_repos
+  when: ansible_distribution in ["Fedora", "Rocky"]
+
 - name: Software | Repos | Import Terraform Fedora
   ansible.builtin.shell: |
     dnf install -y dnf-plugins-core
     dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-  when: ansible_distribution == "Fedora"
+  when: ansible_distribution == "Fedora" and additional_repos.stat.exists == false
 
 - name: Software | Repos | Stat RPM Fusion repos
   ansible.builtin.stat:
@@ -90,12 +92,6 @@
     dnf install -y rpmfusion-free-release
     dnf update -y
   when: ansible_distribution == "Rocky" and rpmfusion_repos.stat.exists == false
-
-- name: Software | Repos | Stat Additional repos
-  ansible.builtin.stat:
-    path: "/etc/yum.repos.d/hashicorp.repo"
-  register: additional_repos
-  when: ansible_distribution in ["Fedora", "Rocky"]
 
 - name: Software | Repos | Install Additional repos Rocky
   ansible.builtin.shell: |
