@@ -25,6 +25,10 @@
   register: debian_sources
   when: ansible_distribution == "Debian"
 
+- name: Debug
+  ansible.builtin.debug:
+    var: debian_sources
+
 - name: Software | Repos | Add Debian sources
   ansible.builtin.copy:
     src: distribution_packages/debian_sources.list
