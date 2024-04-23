@@ -1,4 +1,13 @@
 ---
+- name: Software | Repos | Install package management tools
+  ansible.builtin.package:
+    name:
+      - curl
+      - software-properties-common
+      - wget
+    state: latest
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
 - name: Software | Repos | Add ignored packages Arch
   ansible.builtin.lineinfile:
     dest: /etc/pacman.conf
@@ -13,20 +22,11 @@
 #     backup: yes
 #   when: ansible_distribution == "Debian"
 
-# - name: Software | Repos | Add debian-backports
-#   ansible.builtin.apt_repository:
-#     repo: deb http://deb.debian.org/debian buster-backports main
-#     filename: debian-backports
-#   when: ansible_distribution == "Debian"
-
-- name: Software | Repos | Install package management tools
-  ansible.builtin.package:
-    name:
-      - curl
-      - software-properties-common
-      - wget
-    state: latest
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+- name: Software | Repos | Add debian-backports
+  ansible.builtin.shell: apt-add-repository --component non-free
+    apt-add-repository --component non-free-firmware
+    apt-get update
+  when: ansible_distribution == "Debian"
 
 - name: Software | Repos | Add GitHub CLI sources
   ansible.builtin.shell: |
