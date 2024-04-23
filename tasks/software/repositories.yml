@@ -17,7 +17,7 @@
 
 - name: Software | Repos | Ensure Debian sources updated
   ansible.builtin.lineinfile:
-    path: /etc/ssh/sshd_config
+    path: /etc/apt/sources.list
     regexp: "^# Modified by"
     state: absent
   check_mode: yes
@@ -30,13 +30,6 @@
     src: distribution_packages/debian_sources.list
     dest: /etc/apt/sources.list
   when: ansible_distribution == "Debian" and not debian_sources.found
-
-# - name: Software | Repos | Add debian-backports
-#   ansible.builtin.shell: |
-#     apt-add-repository --component non-free
-#     apt-add-repository --component non-free-firmware
-#     apt-get update
-# when: ansible_distribution == "Debian"
 
 - name: Software | Repos | Add GitHub CLI sources
   ansible.builtin.shell: |
