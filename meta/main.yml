@@ -16,12 +16,10 @@ galaxy_info:
         - all
     - name: Debian
       versions:
-        - buster
         - bullseye
         - bookworm
     - name: Ubuntu
       versions:
-        - bionic
         - focal
         - jammy
     - name: Rocky
