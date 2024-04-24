@@ -3,7 +3,6 @@
   ansible.builtin.package:
     name:
       - at
-      - bat
       - cifs-utils
       - colordiff
       - "{{ cron_package }}"
@@ -36,6 +35,12 @@
     name:
       - "{{ aws_cli }}"
   when: ansible_distribution != "Rocky"
+
+- name: Software | Utilities | Exclude packages Rocky 8
+  ansible.builtin.package:
+    name:
+      - bat
+  when: ansible_distribution != "Rocky" and ansible_distribution_major_version != "8"
 
 - name: Software | Utilities | Install autojump
   ansible.builtin.package:
