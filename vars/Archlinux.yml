@@ -15,7 +15,6 @@ python_package: python
 python_pip_package: python-pip
 python_boto3: python-boto3
 python_botocore: python-botocore
-python_virtualenv_package: python-virtualenv
 rename_package: perl-rename
 ruby: ruby
 sudo_group: wheel

@@ -7,7 +7,6 @@
       - "{{ python_pip_package }}"
       - "{{ python_boto3 }}"
       - "{{ python_botocore }}"
-      - "{{ python_virtualenv_package }}"
       - "{{ ruby }}"
       - vim
     state: latest
