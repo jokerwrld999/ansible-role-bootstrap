@@ -61,6 +61,14 @@
     name:
       - "{{ docker_compose }}"
 
+- name: Docker PS
+  ansible.builtin.command: docker ps
+  register: docker_ps
+
+- name: Debug Docker
+  ansible.builtin.debug:
+    msg: "{{ docker_ps.stdout }}"
+
 - name: Software | Docker | Start docker service
   ansible.builtin.service:
     name: docker

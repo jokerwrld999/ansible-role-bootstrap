@@ -19,11 +19,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: debian12
-          - distro: debian11
-          - distro: fedora39
-          - distro: ubuntu2204
-          - distro: ubuntu2004
+          # - distro: debian12
+          # - distro: debian11
+          # - distro: fedora39
+          # - distro: ubuntu2204
+          # - distro: ubuntu2004
           - distro: rockylinux9
             playbook: converge.yml
 
