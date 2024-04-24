@@ -25,7 +25,7 @@ jobs:
           # - distro: ubuntu2204
           # - distro: ubuntu2004
           - distro: rockylinux9
-            playbook: converge.yml
+          - distro: rockylinux8
 
     steps:
       - name: Check out the codebase.
