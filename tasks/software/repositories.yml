@@ -89,7 +89,6 @@
   ansible.builtin.shell: |
     dnf install -y yum-utils
     dnf install -y epel-release
-    dnf update -y
     dnf install -y rpmfusion-free-release
     dnf update -y
   when: ansible_distribution == "Rocky" and rpmfusion_repos.stat.exists == false

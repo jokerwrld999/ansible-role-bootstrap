@@ -12,7 +12,7 @@
     creates: /usr/bin/docker
   when: ansible_distribution in ["Debian", "Ubuntu"]
 
-- name: Software | Docker | Check for podman package Rocky
+- name: Software | Docker | Check for Podman package Rocky
   ansible.builtin.command: which podman
   register: check_podman
   changed_when: false
@@ -32,10 +32,17 @@
                   podman runc
   when: ansible_distribution == "Rocky" and check_podman.rc == 0
 
-- name: Software | Docker | Install packages Rocky
+- name: Software | Docker | Check for Docker package Rocky
+  ansible.builtin.command: which docker
+  register: check_docker
+  changed_when: false
+  failed_when: false
+  when: ansible_distribution == "Rocky"
+
+- name: Software | Docker | Install Docker packages Rocky
   ansible.builtin.shell: |
     dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
-  when: ansible_distribution == "Rocky" and check_podman.rc == 0
+  when: ansible_distribution == "Rocky" and check_docker.rc == 1
 
 - name: Software | Docker | Create group
   ansible.builtin.group:
@@ -60,14 +67,6 @@
   ansible.builtin.package:
     name:
       - "{{ docker_compose }}"
-
-- name: Docker PS
-  ansible.builtin.command: docker ps
-  register: docker_ps
-
-- name: Debug Docker
-  ansible.builtin.debug:
-    msg: "{{ docker_ps.stdout }}"
 
 - name: Software | Docker | Start docker service
   ansible.builtin.service:
