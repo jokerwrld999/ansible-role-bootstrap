@@ -1,36 +1,35 @@
 ## Ansible Role: Bootstrap
 
+[![CI](https://github.com/jokerwrld999/ansible-role-bootstrap/workflows/CI/badge.svg?event=push)](https://github.com/jokerwrld999/ansible-role-bootstrap/actions?query=workflow%3ACI)
+
 This role provides basic pre-configuration tasks for your servers.
 
 **Features:**
 
+- **System Setup:**
+
+  - Update System and Configure Repositories
+
 - **User Configuration:**
 
   - Configure Root User
-    - Tags: root
+    - Tags: lxc
   - Configure Custom User
-    - Tags: user, development, docker
 
 - **Install Software:**
 
-  - Configure Repositories
-    - Tags: development, docker, lxc
-  - Configure Development Packages
-    - Tags: development, docker, lxc
-  - Configure Tweaks
-    - Tags: tweaks
-  - Configure Docker
-    - Tags: development, docker
-  - Configure Utilities
-    - Tags: utilities
+  - Install Development Packages
+    - Tags: lxc
+  - Install Tweaks
+  - Install Docker
+    - Tags: docker
+  - Install Utilities
 
-- **Perform Remaining Tasks:**
+- **Perform Tweaking:**
   - Configure Hostname
   - Configure Logging
   - Configure Microcode
-    - Tags: microcode
   - Configure OpenSSH
-    - Tags: ssh
   - Install Qemu Guest Agent
 
 ## Requirements:
