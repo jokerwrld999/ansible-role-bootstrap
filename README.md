@@ -1,6 +1,6 @@
 ## Ansible Role: Bootstrap
 
-[![CI](https://github.com/jokerwrld999/ansible-role-bootstrap/actions/workflows/ci.yaml/badge.svg)]
+![CI](https://github.com/jokerwrld999/ansible-role-bootstrap/actions/workflows/ci.yaml/badge.svg)
 
 This role provides basic pre-configuration tasks for your servers.
 
