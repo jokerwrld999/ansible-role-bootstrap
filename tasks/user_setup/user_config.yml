@@ -15,7 +15,7 @@
     shell: /bin/zsh
     generate_ssh_key: yes
     ssh_key_type: "ed25519"
-    ssh_key_file: .ssh/ed_25519
+    ssh_key_file: .ssh/id_ed25519
     ssh_key_comment: "$HOSTNAME"
     state: present
 
