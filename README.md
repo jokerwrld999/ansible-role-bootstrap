@@ -64,8 +64,10 @@ Available variables are listed below, along with default values:
 
 - `set_hostname`: Boolean, defaults to `false`. Set to `true` to configure a
   custom hostname.
+
 - `custom_hostname`: String, a template for the hostname using
   `${{ custom_user }}`.
+
   Example: `{{ custom_user }}-server`
 
 **SSH**
@@ -75,10 +77,13 @@ Available variables are listed below, along with default values:
 **User's Config**
 
 - `setup_user`: Boolean, defaults to `false`. Set to `true` to create a custom user with ZSH shell, p10k customizations and generated ssh keys of `ed25519` type.
+
 - `custom_user`: String, defaults to the value found in environment variable
   `CUSTOM_USER`. Fallback is `"jokerwrld"`. Username for the custom user
   account.
+
   Example to create environment variable: `export CUSTOM_USER=username`.
+
 - `temp_dir`: String, defaults to `"tmp"`. Temporary directory used for certain
   tasks.
 
@@ -91,10 +96,34 @@ python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (
 ```
 
 - `root_passwd`: String, empty by default. Set your Root password.
+
 - `custom_user_passwd`: String, empty by default. Set your Custom user's
   password.
 
 Consider using Ansible Vault or other secure credential management solutions.
+
+**Variables File Example**
+
+```yaml
+---
+# Pre-Configuration
+# Custom Hostname
+set_hostname: false
+custom_hostname: "{{ custom_user }}-server"
+
+# SSH
+ssh_port: 22
+
+# Users Config
+setup_user: false
+custom_user: "{{ lookup('env', 'CUSTOM_USER') | default('jokerwrld', true) }}" # >>> ubuntu | ec2-user | custom_user
+temp_dir: "tmp"
+
+# Encrypt Password
+# python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
+root_passwd: "$6$aBitRBNIk5O7.rRs$.r7jWebBbVsx6GL7/8EixidRnFxtvSPEcXMkCLa.zKXS8ETQjpay54Htc9Q4sLJfs1Cyvjj4VVGpe5yc1zXLe/" # root
+custom_user_passwd: "$6$8ReSwQWsQjmGVfva$2/.pJ9aeIIXxAPhhpDuOhZ7161EKvAx2uFFdGpMC9tpMGEBO4m5MbGYR9nJloPrf68GSb7eSsN6Ef0FMKxkbQ1" # sudo
+```
 
 **Playbook Example**
 
@@ -122,29 +151,6 @@ Consider using Ansible Vault or other secure credential management solutions.
         - name: Pre-Configuration | Rescue
           ansible.builtin.set_fact:
             task_failed: true
-```
-
-**Variables File Example**
-
-```yaml
----
-# Pre-Configuration
-# Custom Hostname
-set_hostname: false
-custom_hostname: "{{ custom_user }}-server"
-
-# SSH
-ssh_port: 22
-
-# Users Config
-setup_user: false
-custom_user: "{{ lookup('env', 'CUSTOM_USER') | default('jokerwrld', true) }}" # >>> ubuntu | ec2-user | custom_user
-temp_dir: "tmp"
-
-# Encrypt Password
-# python3 -c 'import crypt,getpass;pw=getpass.getpass();print(crypt.crypt(pw) if (pw==getpass.getpass("Confirm: ")) else exit())'
-root_passwd: "$6$aBitRBNIk5O7.rRs$.r7jWebBbVsx6GL7/8EixidRnFxtvSPEcXMkCLa.zKXS8ETQjpay54Htc9Q4sLJfs1Cyvjj4VVGpe5yc1zXLe/" # root
-custom_user_passwd: "$6$8ReSwQWsQjmGVfva$2/.pJ9aeIIXxAPhhpDuOhZ7161EKvAx2uFFdGpMC9tpMGEBO4m5MbGYR9nJloPrf68GSb7eSsN6Ef0FMKxkbQ1" # sudo
 ```
 
 ## Dependencies
