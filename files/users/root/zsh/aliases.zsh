@@ -96,15 +96,20 @@ alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' 
 # SHA1
 alias sha1='openssl sha1'
 
-# Alias for git
+# GIT
 alias g='cd ~/github'
 alias gpush='git push'
+alias gpull='git pull'
 alias gst='git status'
+alias gcm="git checkout master && git pull"
+alias gcb="gcm && git checkout -b Deops"
+alias gmm="git fetch && git merge origin/master"
+alias grm="git fetch && git rebase origin/master"
 alias greset="git fetch --all && git reset --hard origin/main"
 alias gfixup="GIT_SEQUENCE_EDITOR=\"curl -s https://raw.githubusercontent.com/jokerwrld999/py-automation/main/scripts/fixup/main.py | python -\" git rebase -i --root"
 alias precommit='pre-commit run --all-files'
 
-# Aliases for docker
+# DOCKER
 alias d='docker'
 alias stopdocks='docker stop $(docker ps -a -q)'
 alias rmdocks='docker rm $(docker ps -a -q)'
