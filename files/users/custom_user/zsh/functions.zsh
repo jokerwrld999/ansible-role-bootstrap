@@ -157,6 +157,30 @@ ghclone() {
 	cd $repo_name
 }
 
+gcm() {
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    git checkout "$default_branch" && git pull
+}
+
+gcb() {
+    gcm && git checkout -b "$1"
+}
+
+gmm() {
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    git fetch && git merge "origin/$default_branch"
+}
+
+grm() {
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    git fetch && git rebase "origin/$default_branch"
+}
+
+greset() {
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    git fetch --all && git reset --hard "origin/$default_branch"
+}
+
 # To cache the passphrase for our session
 ssha() {
     eval "$(ssh-agent -s)"
