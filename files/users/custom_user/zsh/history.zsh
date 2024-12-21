@@ -1,9 +1,11 @@
 # Set history file
-HISTFILE=~/.zhistory
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 
 # Expand the history size
-export HISTFILESIZE=10000
-export HISTSIZE=500
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
 # Don't put duplicate lines in the history and do not add lines that start with a space
 export HISTCONTROL=erasedups:ignoredups:ignorespace
@@ -16,24 +18,12 @@ zle -N down-line-or-beginning-search
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 
-# All terminal sessions append to the history file immediately as commands are entered
-setopt inc_append_history
-
-# save timestamp of command and duration
-setopt extended_history
-
-# when trimming history, lose oldest duplicates first
-setopt hist_expire_dups_first
-
-# When a duplicate command is entered, remove the oldest duplicate
-setopt hist_ignore_all_dups
-
-# remove command line from history list when first character on the line is a space
-setopt hist_ignore_space
-
-# Remove extra blanks from each command line being added to history
-setopt hist_reduce_blanks
-
-# Reads the history file every time history is called
-# This means that the history command will show recent entries, even between terminal sessions
-setopt share_history
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_all_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history # append to the history file immediately as commands are entered
+setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
+setopt share_history # show recent entries, even between terminal sessions
