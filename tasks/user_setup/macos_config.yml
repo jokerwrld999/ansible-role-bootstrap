@@ -1,5 +1,5 @@
-- name: Ensure Zsh is default shell
-  ansible.builtin.command: chsh -s /bin/zsh "{{ custom_user }}"
+# - name: Ensure Zsh is default shell
+#   ansible.builtin.command: chsh -s /bin/zsh "{{ custom_user }}"
 
 - name: Create Zsh config directories
   ansible.builtin.file:
