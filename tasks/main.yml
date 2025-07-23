@@ -20,6 +20,14 @@
         - setup_user is defined
         - setup_user == true
 
+    - name: Pre-Configuration | Configure MacOS
+      ansible.builtin.import_tasks: user_setup/macos_config.yml
+      when:
+        - setup_user is defined
+        - setup_user == true
+      tags:
+        - macos
+
     - name: Pre-Configuration | Configure Dev Packages
       ansible.builtin.import_tasks: software/packages_development.yml
       tags:

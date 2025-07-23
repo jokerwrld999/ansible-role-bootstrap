@@ -1,0 +1,54 @@
+- name: Ensure Zsh is default shell
+  ansible.builtin.command: chsh -s /bin/zsh "{{ custom_user }}"
+
+- name: Create Zsh config directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ custom_user }}"
+    group: staff
+    mode: "0755"
+  with_items:
+    - "/Users/{{ custom_user }}/.zsh"
+
+- name: Deploy main Zsh configuration
+  ansible.builtin.copy:
+    src: "users/custom_user/zsh/{{ item }}"
+    dest: "/Users/{{ custom_user }}/.zsh/{{ item }}"
+    owner: "{{ custom_user }}"
+    group: staff
+    mode: "0600"
+  with_items:
+    - "aliases.zsh"
+    - "bindkey.zsh"
+    - "completion.zsh"
+    - "exports.zsh"
+    - "functions.zsh"
+    - "history.zsh"
+    - "path.zsh"
+    - "plugins.zsh"
+    - "prompt.zsh"
+    - "setopt.zsh"
+    - "theming.zsh"
+
+- name: Deploy root Zsh files
+  ansible.builtin.copy:
+    src: "users/custom_user/{{ item.src }}"
+    dest: "/Users/{{ custom_user }}/{{ item.dest }}"
+    owner: "{{ custom_user }}"
+    group: staff
+    mode: "0600"
+  with_items:
+    - { src: "zsh/zshrc", dest: ".zshrc" }
+    - { src: "zsh/p10k.zsh", dest: ".zsh/.p10k.zsh" }
+
+- name: Install Zsh plugins
+  become_user: "{{ custom_user }}"
+  ansible.builtin.git:
+    repo: "{{ item }}"
+    dest: "/Users/{{ custom_user }}/.zsh/{{ item | basename | regex_replace('\\.git$', '') }}"
+    force: yes
+  with_items:
+    - https://github.com/zsh-users/zsh-autosuggestions
+    - https://github.com/zsh-users/zsh-syntax-highlighting.git
+    - https://github.com/romkatv/powerlevel10k.git
