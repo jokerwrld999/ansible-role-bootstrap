@@ -1,6 +1,8 @@
 ---
 - name: Pre-Configuration | Include Distro Variables
-  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  ignore_errors: true
   tags: always
 
 - name: Pre-Configuration
